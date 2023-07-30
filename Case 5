@@ -1,0 +1,15 @@
+SELECT *  -- seleciona todas as colunas da tabela --
+FROM users_emails -- de onde os dados serão puxados --
+WHERE data_cadastro >= DATA_SUB(CURRENTDATE(), INTERVAL 30 DAY); --filtrar resultados de cadastros apenas no intervalo igual ou menor a 30 dias--
+
+Exemplo de script Python para exportar relatório:
+
+-- Nome do arquivo CSV para exportar os resultados --
+nome_arquivo_csv = 'relatorio_usuarios_cadastrados_ultimos_30_dias.csv'
+
+with open(nome_arquivo_csv, 'w', newline='') as arquivo_csv:
+    writer = csv.writer(arquivo_csv)
+    writer.writerow([i[0] for i in cursor.description])
+    writer.writerows(resultado)
+
+print(f'Relatório exportado com sucesso para o arquivo "{nome_arquivo_csv}"')
